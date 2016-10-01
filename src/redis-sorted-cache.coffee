@@ -2,9 +2,10 @@ errify = require "errify"
 
 
 class RedisSortedCache
-  constructor: ({@redis, @name, @ttl}) ->
+  constructor: ({@redis, @name, @ttl, @cacheTtl}) ->
     throw new Error "redis client and ttl required" unless @redis and @ttl
     @name or= "sortedcache"
+    @cacheTtl or= @ttl + 60
 
   # add key to set with expiry
   add: (key, value, timestamp = Date.now(), callback) ->
@@ -15,6 +16,7 @@ class RedisSortedCache
     multi = @redis.multi()
     multi.set key, value, "EX", @ttl
          .zadd @name, timestamp, key
+         .EXPIRE @name, @cacheTtl
          .exec callback
 
   # add key to set
@@ -23,7 +25,10 @@ class RedisSortedCache
       callback = timestamp
       timestamp = Date.now()
 
-    @redis.zadd @name, timestamp, key, callback
+    multi = @redis.multi()
+    multi.zadd @name, timestamp, key
+         .EXPIRE @name, @cacheTtl
+         .exec callback
 
   _parseArgs: (ttl, callback) ->
     if typeof ttl is "function"
