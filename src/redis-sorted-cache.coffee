@@ -36,6 +36,7 @@ class RedisSortedCache
     {ttl, callback} = @_parseArgs arguments...
     ideally = errify callback
     await @keys ttl, ideally defer keys
+    return callback() unless keys.length
     @redis.mget keys..., callback
 
   # get all keys since ttl
@@ -45,7 +46,7 @@ class RedisSortedCache
     @redis.ZRANGEBYSCORE @name, cutoff, "+inf", callback
 
   # remove keys from before ttl
-  expire: =>
+  expire: ->
     {ttl, callback} = @_parseArgs arguments...
     cutoff = Date.now() - ttl * 1000
     @redis.ZREMRANGEBYSCORE @name, "-inf", cutoff, callback
@@ -55,6 +56,7 @@ class RedisSortedCache
 
   stopAutoExpire: ->
     clearInterval @_expirer if @_expirer
+    delete @_expirer
 
 
 module.exports = RedisSortedCache
