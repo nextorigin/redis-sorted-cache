@@ -1,6 +1,6 @@
 {
   "name": "redis-sorted-cache",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A helper class to expire keys from a sorted set in Redis, useful for timeseries caches",
   "main": "./redis-sorted-cache.js",
   "directories": {
