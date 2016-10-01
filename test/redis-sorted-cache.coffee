@@ -38,12 +38,13 @@ describe "RedisSortedCache", ->
     done()
 
   describe "##constructor", ->
-    it "should set redis, name, and ttl on the instance", ->
+    it "should set redis, name, ttl, and cacheTtl on the instance", ->
       expect(cache.redis).to.exist
       expect(cache.redis).to.be.an "object"
       expect(cache.name).to.equal name
       expect(cache.ttl).to.be.a "number"
       expect(cache.ttl).to.equal ttl
+      expect(cache.cacheTtl).to.equal ttl + 60
 
   describe "add", ->
     it "should add a key and add it to the set", (done) ->
@@ -55,6 +56,18 @@ describe "RedisSortedCache", ->
       expect(keys[0]).to.equal key
       await redis.get key, ideally defer result
       expect(result).to.equal value
+      done()
+
+    it "should expire the set list after cacheTtl", (done) ->
+      ideally = errify done
+      cacheTtl = 1
+      cache.cacheTtl = cacheTtl
+
+      await cache.add key, value, ideally defer()
+
+      await setTimeout defer(), cacheTtl * 1000
+      await redis.zrange name, 0, -1, ideally defer result
+      expect(result).to.be.empty
       done()
 
   describe "addToSet", ->
@@ -75,6 +88,18 @@ describe "RedisSortedCache", ->
 
       await redis.ZRANGEBYSCORE name, (timestamp - 500), (timestamp + 500), ideally defer keys
       expect(keys[0]).to.equal key
+      done()
+
+    it "should expire the set list after cacheTtl", (done) ->
+      ideally = errify done
+      cacheTtl = 1
+      cache = new RedisSortedCache {redis, name, ttl, cacheTtl}
+
+      await cache.add key, value, ideally defer()
+
+      await setTimeout defer(), cacheTtl * 1000
+      await redis.zrange name, 0, -1, ideally defer result
+      expect(result).to.be.empty
       done()
 
   describe "all", ->
