@@ -1,0 +1,49 @@
+{
+  "name": "redis-sorted-cache",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./redis-sorted-cache.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run test:modules && npm run test:coverage",
+    "test:modules": "mocha --recursive --compilers coffee:iced-coffee-script/register --require iced-coffee-coverage/register-istanbul test/",
+    "test:coverage": "istanbul report",
+    "build": "iced --bare --map --runtime node -o lib/ -c src/",
+    "watch": "iced --watch --bare --map --runtime node -o lib/ -c src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextorigin/redis-sorted-cache.git"
+  },
+  "keywords": [
+    "redis",
+    "sorted",
+    "cache",
+    "expire",
+    "list",
+    "set",
+    "range",
+    "timeseries"
+  ],
+  "author": "doublerebel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nextorigin/redis-sorted-cache/issues"
+  },
+  "homepage": "https://github.com/nextorigin/redis-sorted-cache#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.12",
+    "iced-coffee-coverage": "^1.0.3",
+    "iced-coffee-script": "^108.0.11",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.0",
+    "redis": "^2.6.2"
+  },
+  "dependencies": {
+    "errify": "^1.0.0",
+    "iced-runtime": "^1.0.3"
+  }
+}
