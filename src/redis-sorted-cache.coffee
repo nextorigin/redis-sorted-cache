@@ -7,7 +7,7 @@ class RedisSortedCache
     @name or= "sortedcache"
     @cacheTtl or= @ttl + 60
 
-  # add key to set with expiry
+  # add key and add to set with expiry
   add: (key, value, timestamp = Date.now(), callback) ->
     if typeof timestamp is "function"
       callback = timestamp
@@ -19,7 +19,7 @@ class RedisSortedCache
          .EXPIRE @name, @cacheTtl
          .exec callback
 
-  # add key to set
+  # add key to set with expiry
   addToSet: (key, timestamp = Date.now(), callback) ->
     if typeof timestamp is "function"
       callback = timestamp
