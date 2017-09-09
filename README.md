@@ -1,5 +1,7 @@
 # redis-sorted-cache
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nextorigin/redis-sorted-cache.svg)](https://greenkeeper.io/)
+
 [![Build Status][ci-nextorigin]][travis-ci]
 [![Coverage Status][coverage-nextorigin]][coveralls]
 [![Dependency Status][dependency]][david]
