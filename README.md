@@ -5,6 +5,7 @@
 [![Dependency Status][dependency]][david]
 [![devDependency Status][dev-dependency]][david-dev]
 [![Downloads][downloads]][npm-package]
+[![Greenkeeper badge][greenkeeper-enabled]][greenkeeper]
 
 A helper class to expire keys from a sorted set in Redis, useful for timeseries caches
 
@@ -78,3 +79,5 @@ MIT
   [downloads]: https://img.shields.io/npm/dm/redis-sorted-cache.svg?style=flat-square
   [npm-package]: https://www.npmjs.org/package/redis-sorted-cache
   [npm-stats]: https://nodei.co/npm/redis-sorted-cache.png?downloads=true&downloadRank=true&stars=true
+  [greenkeeper-enabled]: https://badges.greenkeeper.io/nextorigin/spine-awaitajax.svg
+  [greenkeeper]: https://greenkeeper.io/
