@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/nextorigin/redis-sorted-cache#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.2",
     "coveralls": "^2.11.12",
     "iced-coffee-coverage": "^1.0.3",
     "iced-coffee-script": "^108.0.11",
