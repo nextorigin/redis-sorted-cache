@@ -4,6 +4,7 @@ node_js:
   - "5"
   - "4"
   - "0.12"
+  - "10"
 services:
   - redis-server
 after_success:
