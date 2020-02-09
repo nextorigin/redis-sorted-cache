@@ -40,7 +40,7 @@
     "iced-coffee-script": "^108.0.11",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.0",
-    "redis": "^2.6.2"
+    "redis": "^3.0.2"
   },
   "dependencies": {
     "errify": "^1.0.0",
